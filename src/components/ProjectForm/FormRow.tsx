@@ -27,14 +27,18 @@ const FormRow: React.FC<FormRowProps> = ({
         </label>
 
         {type === "select" ? (
-          <select id={name} className="block border" {...register(`${name}`)}>
+          <select
+            id={name}
+            className="block border p-1 mb-2"
+            {...register(`${name}`)}
+          >
             {children}
           </select>
         ) : (
           <input
             id={name}
             type={type}
-            className="block border"
+            className="block border p-1 mb-1"
             {...register(`${name}`)}
           />
         )}

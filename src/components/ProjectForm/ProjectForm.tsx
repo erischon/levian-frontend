@@ -1,7 +1,6 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 
 import FormRow from "./FormRow";
 import Button from "../Button";
@@ -61,8 +60,6 @@ function ProjectForm(): JSX.Element {
 
         <Button>Submit</Button>
       </form>
-
-      <DevTool control={control} />
     </>
   );
 }
