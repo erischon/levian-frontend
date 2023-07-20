@@ -1,9 +1,11 @@
+import { UseFormRegister, FieldValues } from "react-hook-form";
+
 interface FormRowProps {
   label: string;
   type: string;
   name: string;
   children?: React.ReactNode;
-  register: any;
+  register: UseFormRegister<FieldValues>;
 }
 
 const FormRow: React.FC<FormRowProps> = ({
@@ -21,12 +23,7 @@ const FormRow: React.FC<FormRowProps> = ({
         </label>
 
         {type === "select" ? (
-          <select
-            name={name}
-            id={name}
-            className="block border"
-            {...register(`${name}`)}
-          >
+          <select id={name} className="block border" {...register(`${name}`)}>
             {children}
           </select>
         ) : (

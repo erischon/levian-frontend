@@ -1,13 +1,14 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 
 import FormRow from "./FormRow";
 
 const ProjectForm = () => {
   const form = useForm();
 
-  const { register } = form;
+  const { register, control } = form;
 
   return (
     <>
@@ -36,6 +37,8 @@ const ProjectForm = () => {
 
         <button>Submit</button>
       </form>
+
+      <DevTool control={control} />
     </>
   );
 };
