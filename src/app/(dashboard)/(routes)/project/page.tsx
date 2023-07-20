@@ -1,18 +1,14 @@
-import axios from "axios";
+import ProjectForm from "@/components/ProjectForm/ProjectForm";
 
-const getProjects = async () => {
-  try {
-    const res = await axios.get("http://localhost:3456/api/projects/");
+function ProjectPage() {
+  return (
+    <>
+      <main>
+        <h1>Project Page</h1>
 
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-async function ProjectPage() {
-  const data = await getProjects();
-  console.log("======data", data);
-  return <div>ProjectPage</div>;
+        <ProjectForm />
+      </main>
+    </>
+  );
 }
 export default ProjectPage;
