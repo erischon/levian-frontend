@@ -8,6 +8,10 @@ interface FormRowProps {
   register: UseFormRegister<FieldValues>;
 }
 
+/**
+ * @description FormRow component, used to create a row in a form
+ * @return {JSX.Element}
+ */
 const FormRow: React.FC<FormRowProps> = ({
   label,
   type,

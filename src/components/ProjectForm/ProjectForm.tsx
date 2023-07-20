@@ -5,14 +5,25 @@ import { DevTool } from "@hookform/devtools";
 
 import FormRow from "./FormRow";
 
+/**
+ * @description ProjectForm component, used to create a new project
+ * @return {JSX.Element}
+ */
 const ProjectForm = () => {
   const form = useForm();
 
-  const { register, control } = form;
+  const { register, control, handleSubmit } = form;
+
+  const onSubmit = (data: object) => {
+    console.log("Form submitted", data);
+  };
 
   return (
     <>
-      <form className="flex flex-col w-full sm:max-w-xl px-6 py-6 mx-auto mb-6 bg-slate-50 rounded-md">
+      <form
+        className="flex flex-col w-full sm:max-w-xl px-6 py-6 mx-auto mb-6 bg-slate-50 rounded-md"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <FormRow
           label="Nom du projet"
           type="text"
