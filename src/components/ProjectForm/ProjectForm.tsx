@@ -2,15 +2,15 @@
 
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
-import axios from "axios";
 
 import FormRow from "./FormRow";
+import Button from "../Button";
 
 /**
  * @description ProjectForm component, used to create a new project
  * @return {JSX.Element}
  */
-const ProjectForm = () => {
+function ProjectForm(): JSX.Element {
   const form = useForm();
 
   const { register, control, handleSubmit } = form;
@@ -34,7 +34,7 @@ const ProjectForm = () => {
   return (
     <>
       <form
-        className="flex flex-col w-full sm:max-w-xl px-6 py-6 mx-auto mb-6 bg-slate-50 rounded-md"
+        className="flex flex-col w-full sm:max-w-xl px-6 py-6 mx-auto mb-6 bg-cyan-50 rounded-md"
         onSubmit={handleSubmit(onSubmit)}
       >
         <FormRow
@@ -59,11 +59,12 @@ const ProjectForm = () => {
           <option value="canceled">Canceled</option>
         </FormRow>
 
-        <button>Submit</button>
+        <Button>Submit</Button>
       </form>
 
       <DevTool control={control} />
     </>
   );
-};
+}
+
 export default ProjectForm;

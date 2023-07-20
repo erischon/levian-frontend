@@ -1,13 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Levian",
+  title: "Levian MVP",
   description:
-    "Un outil de back office pour faciliter la gestion administrative Freelances.",
+    "Levian is a project management tool for freelancers and small teams.",
 };
 
 export default function RootLayout({
@@ -17,7 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      {/* <body className={inter.className}>{children}</body> */}
+      <body className="m-2">{children}</body>
     </html>
   );
 }
