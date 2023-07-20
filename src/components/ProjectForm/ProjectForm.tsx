@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
+import axios from "axios";
 
 import FormRow from "./FormRow";
 
@@ -14,8 +15,20 @@ const ProjectForm = () => {
 
   const { register, control, handleSubmit } = form;
 
-  const onSubmit = (data: object) => {
-    console.log("Form submitted", data);
+  const onSubmit = async (data: object) => {
+    try {
+      await fetch("http://localhost:3456/api/projects", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      console.log("====== Form submitted", data);
+    } catch (error) {
+      console.log("", error);
+    }
   };
 
   return (
@@ -41,9 +54,9 @@ const ProjectForm = () => {
         />
 
         <FormRow label="Status" type="select" name="status" register={register}>
-          <option>In progress</option>
-          <option>Completed</option>
-          <option>Canceled</option>
+          <option value="in_progress">In progress</option>
+          <option value="completed">Completed</option>
+          <option value="canceled">Canceled</option>
         </FormRow>
 
         <button>Submit</button>
