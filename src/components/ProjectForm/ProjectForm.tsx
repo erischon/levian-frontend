@@ -1,9 +1,22 @@
 "use client";
 
+import { use } from "react";
 import { useForm } from "react-hook-form";
 
 import FormRow from "./FormRow";
 import Button from "../Button";
+
+async function getCustomers() {
+  try {
+    const res = await fetch("http://localhost:3456/api/customers/", {
+      next: { revalidate: 10 },
+    });
+
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 /**
  * @description ProjectForm component, used to create a new project
@@ -11,8 +24,9 @@ import Button from "../Button";
  */
 function ProjectForm(): JSX.Element {
   const form = useForm();
-
   const { register, control, handleSubmit } = form;
+
+  const customers = use(getCustomers());
 
   const onSubmit = async (data: object) => {
     try {
@@ -43,7 +57,13 @@ function ProjectForm(): JSX.Element {
           register={register}
         />
 
-        <FormRow label="Client" type="text" name="client" register={register} />
+        <FormRow label="Client" type="select" name="client" register={register}>
+          {customers.map((customer: any) => (
+            <option key={customer._id} value={customer._id}>
+              {customer.name}
+            </option>
+          ))}
+        </FormRow>
 
         <FormRow
           label="Date de début"

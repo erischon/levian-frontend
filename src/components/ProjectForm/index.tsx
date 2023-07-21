@@ -1,3 +1,4 @@
 import ProjectForm from "./ProjectForm";
+import CustomerForm from "./CustomerFom";
 
-export default ProjectForm;
+export { ProjectForm, CustomerForm };

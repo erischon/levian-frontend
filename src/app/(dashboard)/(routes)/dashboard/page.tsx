@@ -55,7 +55,7 @@ const DashboardPage = async (): Promise<JSX.Element> => {
           <div className="flex gap-2 justify-between items-center">
             <HiOutlineBuildingOffice2 />
 
-            <Link href="/project">Add Client</Link>
+            <Link href="/customer">Add Client</Link>
           </div>
         </Button>
 

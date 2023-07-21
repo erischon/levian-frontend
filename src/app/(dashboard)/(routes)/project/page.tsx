@@ -1,7 +1,8 @@
-import ProjectForm from "@/components/ProjectForm/ProjectForm";
+import { ProjectForm } from "@/components/ProjectForm/";
 
 /**
  * @description ProjectPage component, used to display the project creation page
+ * @version 1.0.0
  * @returns {JSX.Element}
  */
 function ProjectPage(): JSX.Element {
