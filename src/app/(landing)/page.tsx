@@ -13,10 +13,6 @@ export default async function Home(): Promise<JSX.Element> {
       <h2 className="font-semibold text-xl mb-4">
         Outil de gestion du temps pour les indépendants
       </h2>
-
-      <Button>
-        <Link href="/project">Créer un projet</Link>
-      </Button>
     </main>
   );
 }
