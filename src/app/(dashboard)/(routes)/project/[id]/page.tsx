@@ -46,22 +46,32 @@ const ProjectDetailPage = ({
   return (
     <>
       <div>
-        <section className="my-6">
-          <h1 className="text-2xl font-semibold ">{project?.name}</h1>
+        <section className="flex flex-col my-8">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-semibold mb-4">{project?.name}</h1>
+
+            <div className="border border-indigo-200 py-1 px-3 rounded-md shadow-sm text-sm">
+              <Link href="/">Update project</Link>
+            </div>
+          </div>
+
+          <p className="text-sm pl-4 border-l-4 border-indigo-300">
+            {project?.description}
+          </p>
         </section>
 
-        <section>
-          <h2 className="flex justify-start items-center gap-2 text-lg font-semibold mb-2">
+        <section className="flex flex-col my-8">
+          <h2 className="flex justify-start items-center gap-2 text-lg font-semibold mb-4">
             <BsInfoSquare />
             Infos
           </h2>
 
-          <div className="text-sm">
-            <p className="">
+          <div className="sm:flex sm:justify-start sm:items-center gap-6 text-sm">
+            <p className="sm:border-r-2 border-indigo-300 sm:pr-4">
               Start Date :{" "}
               <span className="font-semibold tracking-wider">{startDate}</span>
             </p>
-            <p className="">
+            <p className="sm:border-r-2 border-indigo-300 sm:pr-4">
               Status :{" "}
               <span className="font-semibold tracking-wider">
                 {project?.status}
@@ -74,14 +84,14 @@ const ProjectDetailPage = ({
           </div>
         </section>
 
-        <section className="my-6">
+        <section className="my-8">
           <div className="flex justify-between items-center">
             <h2 className="flex justify-start items-center gap-2 text-lg font-semibold">
               <GoTasklist />
               Tasks
             </h2>
 
-            <div className="border border-indigo-200 py-1 px-3 rounded-md shadow-sm">
+            <div className="border border-indigo-200 py-1 px-3 rounded-md shadow-sm text-sm">
               <Link href="/">Add Task</Link>
             </div>
           </div>
