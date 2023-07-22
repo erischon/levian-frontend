@@ -57,7 +57,12 @@ function ProjectForm(): JSX.Element {
           register={register}
         />
 
-        <FormRow label="Client" type="select" name="client" register={register}>
+        <FormRow
+          label="Client"
+          type="select"
+          name="customer"
+          register={register}
+        >
           {customers.map((customer: any) => (
             <option key={customer._id} value={customer._id}>
               {customer.name}
