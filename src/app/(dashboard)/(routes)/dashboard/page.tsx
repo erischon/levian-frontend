@@ -55,7 +55,7 @@ const DashboardPage = async (): Promise<JSX.Element> => {
           <div className="flex gap-2 justify-between items-center">
             <HiOutlineBuildingOffice2 />
 
-            <Link href="/customer">Add Client</Link>
+            <Link href="/customer">Add Customer</Link>
           </div>
         </Button>
 
@@ -69,7 +69,7 @@ const DashboardPage = async (): Promise<JSX.Element> => {
       </section>
 
       <section className="">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {data.map((project: any) => (
             <CardProject key={project._id} project={project} />
           ))}

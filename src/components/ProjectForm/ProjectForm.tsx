@@ -47,7 +47,7 @@ function ProjectForm(): JSX.Element {
   return (
     <>
       <form
-        className="flex flex-col w-full sm:max-w-xl px-6 py-6 mx-auto mb-6 bg-cyan-50 rounded-md"
+        className="flex flex-col w-full sm:max-w-xl px-6 py-6 mx-auto mb-6 bg-indigo-50 rounded-md"
         onSubmit={handleSubmit(onSubmit)}
       >
         <FormRow

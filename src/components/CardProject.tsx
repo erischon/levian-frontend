@@ -7,7 +7,6 @@ interface ProjectProps {
     name: string;
     startDate: string;
     status: string;
-    tasks?: Array<string>;
   };
 }
 
@@ -32,8 +31,8 @@ const CardProject: React.FC<ProjectProps> = ({ project }): JSX.Element => {
         </p>
 
         <p>
-          Task(s):{" "}
-          <span className="font-semibold">{project.tasks?.length}</span>
+          Task(s):
+          <span className="font-semibold">0</span>
         </p>
       </div>
     </>

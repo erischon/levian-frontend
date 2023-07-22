@@ -19,7 +19,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className="max-w-4xl mx-auto">{children}</body>
+      <body className="max-w-2xl mx-auto">{children}</body>
     </html>
   );
 }
