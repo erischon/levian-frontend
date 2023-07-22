@@ -3,6 +3,7 @@ import Link from "next/link";
 import { use } from "react";
 
 import { GoTasklist } from "react-icons/go";
+import { BsInfoSquare } from "react-icons/bs";
 
 const getProject = async (id: string) => {
   try {
@@ -40,6 +41,8 @@ const ProjectDetailPage = ({
   const project = use(getProject(params.id));
   const tasks = use(getTasks(params.id));
 
+  const startDate = new Date(project.startDate).toLocaleDateString();
+
   return (
     <>
       <div>
@@ -48,21 +51,39 @@ const ProjectDetailPage = ({
         </section>
 
         <section>
-          <h2 className="text-lg font-medium">Infos</h2>
+          <h2 className="flex justify-start items-center gap-2 text-lg font-semibold mb-2">
+            <BsInfoSquare />
+            Infos
+          </h2>
 
-          <p className="mt-4">Status : {project?.status}</p>
+          <div className="text-sm">
+            <p className="">
+              Start Date :{" "}
+              <span className="font-semibold tracking-wider">{startDate}</span>
+            </p>
+            <p className="">
+              Status :{" "}
+              <span className="font-semibold tracking-wider">
+                {project?.status}
+              </span>
+            </p>
+            <p className="">
+              Assignee :{" "}
+              <span className="font-semibold tracking-wider">User</span>
+            </p>
+          </div>
         </section>
 
-        <section className="border border-gray-200 p-4 rounded-md my-6">
+        <section className="my-6">
           <div className="flex justify-between items-center">
-            <h2 className="flex justify-start items-center gap-2 text-xl font-semibold">
+            <h2 className="flex justify-start items-center gap-2 text-lg font-semibold">
               <GoTasklist />
               Tasks
             </h2>
 
-            <Button>
+            <div className="border border-indigo-200 py-1 px-3 rounded-md shadow-sm">
               <Link href="/">Add Task</Link>
-            </Button>
+            </div>
           </div>
 
           <ul className="mt-4">
