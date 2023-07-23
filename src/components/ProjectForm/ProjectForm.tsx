@@ -61,6 +61,13 @@ function ProjectForm(): JSX.Element {
         />
 
         <FormRow
+          label="Description"
+          type="textarea"
+          name="description"
+          register={register}
+        />
+
+        <FormRow
           label="Client"
           type="select"
           name="customer"

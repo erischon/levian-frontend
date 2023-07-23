@@ -26,22 +26,40 @@ const FormRow: React.FC<FormRowProps> = ({
           {label}
         </label>
 
-        {type === "select" ? (
-          <select
-            id={name}
-            className="block border p-1 mb-2"
-            {...register(`${name}`)}
-          >
-            {children}
-          </select>
-        ) : (
-          <input
-            id={name}
-            type={type}
-            className="block border p-1 mb-1"
-            {...register(`${name}`)}
-          />
-        )}
+        {(() => {
+          switch (type) {
+            case "select":
+              return (
+                <select
+                  id={name}
+                  className="block border p-1 mb-2"
+                  {...register(`${name}`)}
+                >
+                  {children}
+                </select>
+              );
+            case "textarea":
+              return (
+                <textarea
+                  id={name}
+                  rows={3}
+                  className="block border p-1 mb-2"
+                  {...register(`${name}`)}
+                >
+                  {children}
+                </textarea>
+              );
+            default:
+              return (
+                <input
+                  id={name}
+                  type={type}
+                  className="block border p-1 mb-1"
+                  {...register(`${name}`)}
+                />
+              );
+          }
+        })()}
       </div>
     </>
   );

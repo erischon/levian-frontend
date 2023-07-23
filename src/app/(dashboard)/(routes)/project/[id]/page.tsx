@@ -22,7 +22,7 @@ const getProject = async (id: string) => {
 const getTasks = async (id: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URI}/api/projects/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URI}/api/tasks/${id}`,
       {
         next: { revalidate: 10 },
       }
