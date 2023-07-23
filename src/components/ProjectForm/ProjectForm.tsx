@@ -8,9 +8,12 @@ import Button from "../Button";
 
 async function getCustomers() {
   try {
-    const res = await fetch("http://localhost:3456/api/customers/", {
-      next: { revalidate: 10 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URI}/api/customers/`,
+      {
+        next: { revalidate: 10 },
+      }
+    );
 
     return res.json();
   } catch (err) {
@@ -30,7 +33,7 @@ function ProjectForm(): JSX.Element {
 
   const onSubmit = async (data: object) => {
     try {
-      await fetch("http://localhost:3456/api/projects", {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/projects/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

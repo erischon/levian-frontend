@@ -7,9 +7,12 @@ import { BsInfoSquare } from "react-icons/bs";
 
 const getProject = async (id: string) => {
   try {
-    const res = await fetch(`http://localhost:3456/api/projects/${id}`, {
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URI}/api/projects/${id}`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
     return res.json();
   } catch (err) {
@@ -18,9 +21,12 @@ const getProject = async (id: string) => {
 };
 const getTasks = async (id: string) => {
   try {
-    const res = await fetch(`http://localhost:3456/api/tasks/project/${id}`, {
-      next: { revalidate: 10 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URI}/api/projects/${id}`,
+      {
+        next: { revalidate: 10 },
+      }
+    );
 
     return res.json();
   } catch (err) {

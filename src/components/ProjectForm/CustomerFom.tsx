@@ -17,7 +17,7 @@ function CustomerForm(): JSX.Element {
 
   const onSubmit = async (data: object) => {
     try {
-      await fetch("http://localhost:3456/api/customers", {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/customers/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

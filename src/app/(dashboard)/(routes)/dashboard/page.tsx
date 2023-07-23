@@ -8,9 +8,12 @@ import CardProject from "@/components/CardProject";
 
 async function getProjects() {
   try {
-    const res = await fetch("http://localhost:3456/api/projects/", {
-      next: { revalidate: 10 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URI}/api/projects/`,
+      {
+        next: { revalidate: 10 },
+      }
+    );
 
     return res.json();
   } catch (err) {
