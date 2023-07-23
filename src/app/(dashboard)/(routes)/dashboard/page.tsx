@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 import { AiOutlineProject } from "react-icons/ai";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 
+import { options } from "@/app/api/auth/[...nextauth]/options";
 import Button from "@/components/Button";
 import CardProject from "@/components/CardProject";
 
@@ -27,6 +30,13 @@ async function getProjects() {
  * @returns {JSX.Element}
  */
 const DashboardPage = async (): Promise<JSX.Element> => {
+  const session = await getServerSession(options);
+  console.log(session);
+
+  if (!session) {
+    redirect("/api/auth/signin?callbackUrl=/dashboard");
+  }
+
   let data = await getProjects();
 
   // sort projects by date
