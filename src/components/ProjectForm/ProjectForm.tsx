@@ -2,6 +2,7 @@
 
 import { use } from "react";
 import { useForm } from "react-hook-form";
+import { getServerSession } from "next-auth";
 
 import FormRow from "./FormRow";
 import Button from "../Button";
@@ -92,6 +93,8 @@ function ProjectForm(): JSX.Element {
           <option value="completed">Completed</option>
           <option value="canceled">Canceled</option>
         </FormRow>
+
+        {/* <input type="hidden" {...register(`${id}`)} /> */}
 
         <Button>Submit</Button>
       </form>
