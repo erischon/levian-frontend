@@ -16,14 +16,32 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("====== signIn", {
-        user,
-        account,
-        profile,
-        email,
-        credentials,
-      });
+    async signIn({ user, account }) {
+      const userInfos = {
+        providerId: user.id,
+        name: user.name,
+        email: user.email,
+        image: user.image,
+        provider: account?.provider,
+      };
+
+      // Call api to create user if not exists, and get user id
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URI}/auth/signin`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userInfos),
+        }
+      );
+      const data = await res.json();
+      const userId = data.userId._id;
+
+      // Replace user id with the one from api
+      user.id = userId;
+
       return true;
     },
   },
