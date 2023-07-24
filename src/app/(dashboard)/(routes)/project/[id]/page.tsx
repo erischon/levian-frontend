@@ -47,6 +47,8 @@ const ProjectDetailPage = ({
   const project = use(getProject(params.id));
   const tasks = use(getTasks(params.id));
 
+  console.log("====== project", project);
+
   const startDate = new Date(project.startDate).toLocaleDateString();
 
   return (
@@ -85,7 +87,9 @@ const ProjectDetailPage = ({
             </p>
             <p className="">
               Assignee :{" "}
-              <span className="font-semibold tracking-wider">User</span>
+              <span className="font-semibold tracking-wider">
+                {project.user.name}
+              </span>
             </p>
           </div>
         </section>
