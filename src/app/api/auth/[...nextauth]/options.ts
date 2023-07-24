@@ -4,7 +4,7 @@ import type { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
-export const authOptions: NextAuthOptions = {
+export const options: NextAuthOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
@@ -24,7 +24,6 @@ export const authOptions: NextAuthOptions = {
         image: user.image,
         provider: account?.provider,
       };
-
       // Call api to create user if not exists, and get user id
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URI}/auth/signin`,
@@ -37,10 +36,7 @@ export const authOptions: NextAuthOptions = {
         }
       );
       const data = await res.json();
-      const userId = data.userId._id;
-
-      // Replace user id with the one from api
-      user.id = userId;
+      const loggedUser = data;
 
       return true;
     },

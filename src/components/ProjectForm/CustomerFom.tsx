@@ -24,8 +24,6 @@ function CustomerForm(): JSX.Element {
         },
         body: JSON.stringify(data),
       });
-
-      console.log("====== Form submitted", data);
     } catch (error) {
       console.log("", error);
     }

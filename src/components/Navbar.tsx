@@ -18,6 +18,8 @@ function Navbar(): JSX.Element {
         >
           Dashboard
         </Link>
+
+        <Link href="/api/auth/signout">Logout</Link>
       </nav>
     </>
   );

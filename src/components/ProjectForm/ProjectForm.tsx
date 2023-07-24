@@ -2,7 +2,6 @@
 
 import { use } from "react";
 import { useForm } from "react-hook-form";
-import { getServerSession } from "next-auth";
 
 import FormRow from "./FormRow";
 import Button from "../Button";
@@ -28,6 +27,7 @@ async function getCustomers() {
  */
 function ProjectForm(): JSX.Element {
   const form = useForm();
+
   const { register, control, handleSubmit } = form;
 
   const customers = use(getCustomers());
@@ -41,8 +41,6 @@ function ProjectForm(): JSX.Element {
         },
         body: JSON.stringify(data),
       });
-
-      console.log("====== Form submitted", data);
     } catch (error) {
       console.log("", error);
     }

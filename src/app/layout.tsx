@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import AuthProvider from "@/context/AuthProvider";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +21,9 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body className="max-w-2xl mx-auto">{children}</body>
+      <body className="max-w-2xl mx-auto">
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

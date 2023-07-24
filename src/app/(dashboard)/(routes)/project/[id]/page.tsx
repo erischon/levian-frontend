@@ -47,8 +47,6 @@ const ProjectDetailPage = ({
   const project = use(getProject(params.id));
   const tasks = use(getTasks(params.id));
 
-  console.log("====== project", project);
-
   const startDate = new Date(project.startDate).toLocaleDateString();
 
   return (
