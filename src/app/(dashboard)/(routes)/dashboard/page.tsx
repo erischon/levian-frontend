@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import { AiOutlineProject } from "react-icons/ai";
@@ -5,6 +7,7 @@ import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 
 import Button from "@/components/Button";
 import CardProject from "@/components/CardProject";
+import { use } from "react";
 
 async function getProjects() {
   try {
@@ -26,8 +29,8 @@ async function getProjects() {
  * @version 1.0.0
  * @returns {JSX.Element}
  */
-const DashboardPage = async (): Promise<JSX.Element> => {
-  let data = await getProjects();
+const DashboardPage = (): JSX.Element => {
+  let data = use(getProjects());
 
   // sort projects by date
   function sortByDate(data: any) {
