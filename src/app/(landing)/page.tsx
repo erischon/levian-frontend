@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 import Button from "@/components/Button";
 
@@ -7,6 +9,12 @@ import Button from "@/components/Button";
  * @returns {JSX.Element}
  */
 export default async function Home(): Promise<JSX.Element> {
+  const session = await getServerSession();
+
+  if (session?.user) {
+    redirect("/dashboard");
+  }
+
   return (
     <main className="w-full h-screen flex flex-col justify-center items-center">
       <h1 className="text-3xl font-semibold mb-4">Bienvenue sur Levian !</h1>
