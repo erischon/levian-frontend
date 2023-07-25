@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import Link from "next/link";
 import { use } from "react";
 
@@ -85,9 +84,7 @@ const ProjectDetailPage = ({
             </p>
             <p className="">
               Assignee :{" "}
-              <span className="font-semibold tracking-wider">
-                {project.user.name}
-              </span>
+              <span className="font-semibold tracking-wider">Le user</span>
             </p>
           </div>
         </section>
