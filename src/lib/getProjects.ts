@@ -3,11 +3,9 @@
  * @returns     {Promise}
  */
 export async function getProjects(): Promise<unknown> {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/projects/`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/projects/`);
 
-    return res.json();
-  } catch (err) {
-    console.log(err);
-  }
+  if (!res.ok) throw new Error(res.statusText);
+
+  return res.json();
 }

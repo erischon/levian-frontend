@@ -19,6 +19,18 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async session({ session, token }) {
+      if (session?.user?.id) {
+        return session;
+      }
+      if (session?.user) {
+        session.user.id = token.sub!;
+      }
+
+      console.log("====== session dans le callbacks", session.user);
+
+      return session;
+    },
     async signIn({ user, account }) {
       const userInfos = {
         providerId: user.id,
@@ -42,10 +54,15 @@ export const options: NextAuthOptions = {
       const data = await res.json();
       const loggedUser = data;
 
+      console.log("====== loggedUser", loggedUser);
+
       return true;
     },
-    async redirect({ baseUrl, url }) {
+    async redirect({ baseUrl }) {
       return `${baseUrl}/`;
     },
+  },
+  session: {
+    strategy: "jwt",
   },
 };
