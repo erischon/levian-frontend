@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import Link from "next/link";
 
 import { AiOutlineProject } from "react-icons/ai";
@@ -7,22 +8,7 @@ import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 
 import Button from "@/components/Button";
 import CardProject from "@/components/CardProject";
-import { use } from "react";
-
-async function getProjects() {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URI}/api/projects/`,
-      {
-        next: { revalidate: 10 },
-      }
-    );
-
-    return res.json();
-  } catch (err) {
-    console.log(err);
-  }
-}
+import { getProjects } from "@/lib/getProjects";
 
 /**
  * @description Dashboard page
@@ -30,7 +16,7 @@ async function getProjects() {
  * @returns {JSX.Element}
  */
 const DashboardPage = (): JSX.Element => {
-  let data = use(getProjects());
+  let data: any = use(getProjects());
 
   // sort projects by date
   function sortByDate(data: any) {
