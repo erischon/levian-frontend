@@ -1,28 +1,41 @@
 "use client";
 
-import { use } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 
 import { setLoggedUser } from "@/redux/features/userSlice";
-import { getUser } from "@/lib/getUser";
 
 /**
  * @description Navbar, header of the app
  * @returns {JSX.Element}
  */
 function Navbar(): JSX.Element {
+  const [currentUser, setCurrentUser] = useState();
   const { data: session } = useSession();
   const dispatch = useDispatch();
 
-  const providerId = session?.id;
+  const providerId: string = session?.user?.id!;
 
-  // get user data
-  const currentUser = use(getUser(providerId));
+  useEffect(() => {
+    const getCurrentUser = async (providerId: string) => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URI}/api/user/${providerId}`
+      );
 
-  dispatch(setLoggedUser(currentUser));
+      if (!res.ok) throw new Error(res.statusText);
+
+      const user = await res.json();
+
+      setCurrentUser(user);
+    };
+
+    getCurrentUser(providerId);
+
+    dispatch(setLoggedUser(currentUser));
+  }, [providerId, currentUser, dispatch]);
 
   return (
     <>
