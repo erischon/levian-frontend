@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { ReduxProvider } from "@/redux/provider";
 import AuthProvider from "@/context/AuthProvider";
 
 import "./globals.css";
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 
 /**
  * @description Root layout of the public app
+ * @version 1.0.0
  * @returns {JSX.Element}
  */
 export default function RootLayout({
@@ -22,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="max-w-2xl mx-auto">
-        <AuthProvider>{children}</AuthProvider>
+        <ReduxProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
