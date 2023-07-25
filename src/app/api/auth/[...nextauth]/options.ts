@@ -19,17 +19,14 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async session({ session, token }) {
-      if (session?.user?.id) {
-        return session;
-      }
-      if (session?.user) {
-        session.user.id = token.sub!;
-      }
-
-      console.log("====== session dans le callbacks", session.user);
-
-      return session;
+    session({ session, token }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.sub,
+        },
+      };
     },
     async signIn({ user, account }) {
       const userInfos = {
@@ -53,8 +50,6 @@ export const options: NextAuthOptions = {
       );
       const data = await res.json();
       const loggedUser = data;
-
-      console.log("====== loggedUser", loggedUser);
 
       return true;
     },

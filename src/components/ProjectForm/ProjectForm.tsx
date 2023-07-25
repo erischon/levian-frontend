@@ -29,7 +29,6 @@ function ProjectForm(): JSX.Element {
   const form = useForm();
 
   const { register, control, handleSubmit } = form;
-
   const customers = use(getCustomers());
 
   const onSubmit = async (data: object) => {

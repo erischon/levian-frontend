@@ -6,7 +6,6 @@ import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import Button from "@/components/Button";
 import CardProject from "@/components/CardProject";
 import { getProjects } from "@/lib/getProjects";
-import { getServerSession } from "next-auth";
 
 /**
  * @description Dashboard page
@@ -14,9 +13,6 @@ import { getServerSession } from "next-auth";
  */
 const DashboardPage = async () => {
   let data: any = await getProjects();
-  const session = await getServerSession();
-
-  console.log("====== session sur la page dashboard", session?.user);
 
   // sort projects by date
   function sortByDate(data: any) {
