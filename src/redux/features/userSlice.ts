@@ -4,6 +4,9 @@ const initialState = {
   user: {},
 };
 
+/**
+ * @description Redux slice for user
+ */
 const userSlice = createSlice({
   name: "user",
   initialState,
