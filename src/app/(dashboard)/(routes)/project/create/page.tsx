@@ -10,9 +10,8 @@ const fetcher = (args: any) => fetch(args).then((res) => res.json());
 /**
  * @description CreateProjectPage component, page to create a project
  * @version 1.0.0
- * @returns {JSX.Element}
  */
-function CreateProjectPage(): JSX.Element {
+function CreateProjectPage() {
   const { user } = useSelector((state: any) => state.user);
 
   const { data, error, isLoading } = useSWR(
@@ -22,9 +21,6 @@ function CreateProjectPage(): JSX.Element {
     fetcher
   );
 
-  console.log("====== user", user?.id);
-  console.log("====== customers", data);
-
   return (
     <>
       <main className="w-[90%] sm:w-1/2 mx-auto">
@@ -32,7 +28,7 @@ function CreateProjectPage(): JSX.Element {
           Ajouter un projet
         </h1>
 
-        {/* <ProjectForm customers={data} /> */}
+        <ProjectForm customers={data} userId={user?.id} />
       </main>
     </>
   );

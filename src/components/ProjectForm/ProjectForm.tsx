@@ -7,14 +7,24 @@ import Button from "../Button";
 
 /**
  * @description ProjectForm component, used to create a new project
- * @return {JSX.Element}
+ * @version 1.0.0
  */
-function ProjectForm({ customers }: { customers: object }): JSX.Element {
+function ProjectForm({
+  customers,
+  userId,
+}: {
+  customers: Array<object>;
+  userId: string;
+}) {
   const form = useForm();
 
   const { register, control, handleSubmit } = form;
 
-  const onSubmit = async (data: object) => {
+  const onSubmit = async (data: any) => {
+    data.user = userId;
+
+    console.log("====== data", data);
+
     try {
       await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/projects/`, {
         method: "POST",
@@ -54,7 +64,7 @@ function ProjectForm({ customers }: { customers: object }): JSX.Element {
           name="customer"
           register={register}
         >
-          {customers.map((customer: any) => (
+          {customers?.map((customer: any) => (
             <option key={customer._id} value={customer._id}>
               {customer.name}
             </option>
@@ -73,8 +83,6 @@ function ProjectForm({ customers }: { customers: object }): JSX.Element {
           <option value="completed">Completed</option>
           <option value="canceled">Canceled</option>
         </FormRow>
-
-        {/* <input type="hidden" {...register(`${id}`)} /> */}
 
         <Button>Submit</Button>
       </form>

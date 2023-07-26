@@ -71,7 +71,7 @@ const DashboardPage = () => {
           <div className="flex gap-2 justify-between items-center">
             <AiOutlineProject />
 
-            <Link href="/project">Add Project</Link>
+            <Link href="/project/create">Add Project</Link>
           </div>
         </Button>
       </section>
