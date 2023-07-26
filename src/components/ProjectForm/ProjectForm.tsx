@@ -1,35 +1,18 @@
 "use client";
 
-import { use } from "react";
 import { useForm } from "react-hook-form";
 
 import FormRow from "./FormRow";
 import Button from "../Button";
 
-async function getCustomers() {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URI}/api/customers/`,
-      {
-        next: { revalidate: 10 },
-      }
-    );
-
-    return res.json();
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 /**
  * @description ProjectForm component, used to create a new project
  * @return {JSX.Element}
  */
-function ProjectForm(): JSX.Element {
+function ProjectForm({ customers }: { customers: object }): JSX.Element {
   const form = useForm();
 
   const { register, control, handleSubmit } = form;
-  const customers = use(getCustomers());
 
   const onSubmit = async (data: object) => {
     try {

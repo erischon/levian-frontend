@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import FadeLoader from "react-spinners/FadeLoader";
 
 import { setUser } from "@/redux/features/userSlice";
@@ -27,8 +27,6 @@ export default function MainLayout({
   useEffect(() => {
     dispatch(setUser(data));
   }, [data, dispatch]);
-
-  const currentUser = useSelector((state: any) => state.user);
 
   if (isLoading)
     return (
