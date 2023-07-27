@@ -30,8 +30,6 @@ const CardProject: React.FC<ProjectProps> = ({ project }) => {
     fetcher
   );
 
-  console.log("====== task data", tasksData);
-
   return (
     <>
       <div className="flex flex-col gap-2 shadow-md p-4">
