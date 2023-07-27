@@ -8,7 +8,7 @@ import FadeLoader from "react-spinners/FadeLoader";
 import { setUser } from "@/redux/features/userSlice";
 
 import Navbar from "@/components/Navbar";
-import useCurrentUser from "@/hooks/useCurrentUser";
+import useUser from "@/hooks/useUser";
 
 /**
  * @description Main layout of the protected app
@@ -20,13 +20,13 @@ export default function MainLayout({
   children: React.ReactNode;
 }): JSX.Element {
   const { data: session } = useSession();
-  const { data, isLoading, isError } = useCurrentUser(session?.user?.id!);
+  const { user, isLoading, isError } = useUser(session?.user?.id!);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setUser(data));
-  }, [data, dispatch]);
+    dispatch(setUser(user));
+  }, [user, dispatch]);
 
   if (isLoading)
     return (
