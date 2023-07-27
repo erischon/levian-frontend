@@ -19,8 +19,6 @@ import useGetProjects from "@/hooks/useGetProjects";
 const DashboardPage = () => {
   const { user } = useSelector((state: any) => state.user);
 
-  console.log(user);
-
   const { data, isLoading } = useGetProjects(user?.id);
 
   if (isLoading)

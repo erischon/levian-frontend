@@ -1,59 +1,44 @@
+"use client";
+
 import Link from "next/link";
-import { use } from "react";
+import useSWR from "swr";
 
 import { GoTasklist } from "react-icons/go";
 import { BsInfoSquare } from "react-icons/bs";
 
-const getProject = async (id: string) => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URI}/api/projects/${id}`,
-      {
-        next: { revalidate: 60 },
-      }
-    );
-
-    return res.json();
-  } catch (err) {
-    console.log(err);
-  }
-};
-const getTasks = async (id: string) => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URI}/api/tasks/${id}`,
-      {
-        next: { revalidate: 10 },
-      }
-    );
-
-    return res.json();
-  } catch (err) {
-    console.log(err);
-  }
-};
+const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 /**
  * @description ProjectDetailPage component, used to display details of a project
  * @version 1.0.0
- * @returns {JSX.Element}
  */
-const ProjectDetailPage = ({
-  params,
-}: {
-  params: { id: string };
-}): JSX.Element => {
-  const project = use(getProject(params.id));
-  const tasks = use(getTasks(params.id));
+const ProjectDetailPage = ({ params }: { params: { id: string } }) => {
+  const {
+    data: projectData,
+    error: projectError,
+    isLoading: projectIsLoading,
+  } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URI}/api/projects/project/${params?.id}`,
+    fetcher
+  );
 
-  const startDate = new Date(project.startDate).toLocaleDateString();
+  const {
+    data: taskData,
+    error: taskError,
+    isLoading: taskIsLoading,
+  } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URI}/api/tasks/project/${projectData?._id}`,
+    fetcher
+  );
+
+  const startDate = new Date(projectData?.startDate).toLocaleDateString();
 
   return (
     <>
       <div>
         <section className="flex flex-col my-8">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-semibold mb-4">{project?.name}</h1>
+            <h1 className="text-2xl font-semibold mb-4">{projectData?.name}</h1>
 
             <div className="border border-indigo-200 py-1 px-3 rounded-md shadow-sm text-sm">
               <Link href="/">Update project</Link>
@@ -61,7 +46,7 @@ const ProjectDetailPage = ({
           </div>
 
           <p className="text-sm pl-4 border-l-4 border-indigo-300">
-            {project?.description}
+            {projectData?.description}
           </p>
         </section>
 
@@ -79,12 +64,14 @@ const ProjectDetailPage = ({
             <p className="sm:border-r-2 border-indigo-300 sm:pr-4">
               Status :{" "}
               <span className="font-semibold tracking-wider">
-                {project?.status}
+                {projectData?.status}
               </span>
             </p>
             <p className="">
               Assignee :{" "}
-              <span className="font-semibold tracking-wider">Le user</span>
+              <span className="font-semibold tracking-wider">
+                {projectData?.user?.name}
+              </span>
             </p>
           </div>
         </section>
@@ -97,13 +84,13 @@ const ProjectDetailPage = ({
             </h2>
 
             <div className="border border-indigo-200 py-1 px-3 rounded-md shadow-sm text-sm">
-              <Link href="/">Add Task</Link>
+              <Link href={`/task/create/${projectData?._id}`}>Add Task</Link>
             </div>
           </div>
 
           <ul className="mt-4">
-            {tasks?.map((task: any) => (
-              <li key={task.id} className="flex justify-between">
+            {taskData?.map((task: any) => (
+              <li key={task._id} className="flex justify-between">
                 <span>{task.name}</span>
                 <span>{task.user.name}</span>
                 <span>{task.status}</span>

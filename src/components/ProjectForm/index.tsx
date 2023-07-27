@@ -1,4 +1,5 @@
 import CreateProjectForm from "./CreateProjectForm";
-import CreateCustomerForm from "./CreateCustomerFom";
+import CreateCustomerForm from "./CreateCustomerForm";
+import CreateTaskForm from "./CreateTaskForm";
 
-export { CreateProjectForm, CreateCustomerForm };
+export { CreateProjectForm, CreateCustomerForm, CreateTaskForm };

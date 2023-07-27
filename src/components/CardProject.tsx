@@ -13,9 +13,8 @@ interface ProjectProps {
 /**
  * @description Component CardProject, card of a project
  * @version 1.0.0
- * @returns {JSX.Element}
  */
-const CardProject: React.FC<ProjectProps> = ({ project }): JSX.Element => {
+const CardProject: React.FC<ProjectProps> = ({ project }) => {
   return (
     <>
       <div className="flex flex-col gap-2 shadow-md p-4">
