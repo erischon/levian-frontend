@@ -6,11 +6,13 @@ interface FormRowProps {
   name: string;
   children?: React.ReactNode;
   register: UseFormRegister<FieldValues>;
+  errors?: any;
+  required?: any;
 }
 
 /**
  * @description FormRow component, used to create a row in a form
- * @return {JSX.Element}
+ * @version 1.0.1
  */
 const FormRow: React.FC<FormRowProps> = ({
   label,
@@ -18,11 +20,13 @@ const FormRow: React.FC<FormRowProps> = ({
   name,
   children,
   register,
+  errors,
+  required,
 }) => {
   return (
     <>
       <div className="flex flex-col mb-2">
-        <label htmlFor={name} className="text-sm">
+        <label htmlFor={name} className="text-xs">
           {label}
         </label>
 
@@ -32,8 +36,10 @@ const FormRow: React.FC<FormRowProps> = ({
               return (
                 <select
                   id={name}
-                  className="block border p-1 mb-2"
-                  {...register(`${name}`)}
+                  className="block border p-2"
+                  {...register(`${name}`, {
+                    required: required,
+                  })}
                 >
                   {children}
                 </select>
@@ -43,8 +49,11 @@ const FormRow: React.FC<FormRowProps> = ({
                 <textarea
                   id={name}
                   rows={3}
-                  className="block border p-1 mb-2"
-                  {...register(`${name}`)}
+                  className="block border p-2"
+                  placeholder={`Enter ${label}...`}
+                  {...register(`${name}`, {
+                    required: required,
+                  })}
                 >
                   {children}
                 </textarea>
@@ -54,12 +63,17 @@ const FormRow: React.FC<FormRowProps> = ({
                 <input
                   id={name}
                   type={type}
-                  className="block border p-1 mb-1"
-                  {...register(`${name}`)}
+                  className="block border p-2  placeholder-gray-400 placeholder-opacity-90"
+                  placeholder={`Enter ${label}...`}
+                  {...register(`${name}`, {
+                    required: required,
+                  })}
                 />
               );
           }
         })()}
+
+        <p className="text-red-500 text-sm italic">{errors?.[name]?.message}</p>
       </div>
     </>
   );

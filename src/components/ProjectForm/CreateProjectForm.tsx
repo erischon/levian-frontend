@@ -6,10 +6,10 @@ import FormRow from "./FormRow";
 import Button from "../Button";
 
 /**
- * @description ProjectForm component, used to create a new project
- * @version 1.0.0
+ * @description CreateProjectForm component, used to create a new project
+ * @version 1.0.1
  */
-function ProjectForm({
+function CreateProjectForm({
   customers,
   userId,
 }: {
@@ -18,7 +18,8 @@ function ProjectForm({
 }) {
   const form = useForm();
 
-  const { register, control, handleSubmit } = form;
+  const { register, control, handleSubmit, formState } = form;
+  const { errors } = formState;
 
   const onSubmit = async (data: any) => {
     data.user = userId;
@@ -45,10 +46,12 @@ function ProjectForm({
         onSubmit={handleSubmit(onSubmit)}
       >
         <FormRow
-          label="Nom du projet"
+          label="Project name"
           type="text"
           name="name"
           register={register}
+          required={{ value: true, message: "Name is required" }}
+          errors={errors}
         />
 
         <FormRow
@@ -56,6 +59,8 @@ function ProjectForm({
           type="textarea"
           name="description"
           register={register}
+          errors={errors}
+          required={{ value: true, message: "Description is required" }}
         />
 
         <FormRow
@@ -63,7 +68,11 @@ function ProjectForm({
           type="select"
           name="customer"
           register={register}
+          errors={errors}
+          required={{ value: true, message: "Customer is required" }}
         >
+          <option value="">Select a customer...</option>
+
           {customers?.map((customer: any) => (
             <option key={customer._id} value={customer._id}>
               {customer.name}
@@ -76,9 +85,20 @@ function ProjectForm({
           type="date"
           name="startDate"
           register={register}
+          errors={errors}
+          required={{ value: true, message: "Start date is required" }}
         />
 
-        <FormRow label="Status" type="select" name="status" register={register}>
+        <FormRow
+          label="Status"
+          type="select"
+          name="status"
+          register={register}
+          errors={errors}
+          required={{ value: true, message: "Status is required" }}
+        >
+          <option value="">Select a status...</option>
+
           <option value="in_progress">In progress</option>
           <option value="completed">Completed</option>
           <option value="canceled">Canceled</option>
@@ -90,4 +110,4 @@ function ProjectForm({
   );
 }
 
-export default ProjectForm;
+export default CreateProjectForm;

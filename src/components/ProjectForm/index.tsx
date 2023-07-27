@@ -1,4 +1,4 @@
-import ProjectForm from "./ProjectForm";
+import CreateProjectForm from "./CreateProjectForm";
 import CustomerForm from "./CustomerFom";
 
-export { ProjectForm, CustomerForm };
+export { CreateProjectForm, CustomerForm };

@@ -63,7 +63,7 @@ const DashboardPage = () => {
           <div className="flex gap-2 justify-between items-center">
             <HiOutlineBuildingOffice2 />
 
-            <Link href="/customer">Add Customer</Link>
+            <Link href="/customer/create">Add Customer</Link>
           </div>
         </Button>
 

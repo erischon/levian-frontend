@@ -3,7 +3,7 @@
 import { useSelector } from "react-redux";
 import useSWR from "swr";
 
-import { ProjectForm } from "@/components/ProjectForm/";
+import { CreateProjectForm } from "@/components/ProjectForm/";
 
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
@@ -28,7 +28,7 @@ function CreateProjectPage() {
           Ajouter un projet
         </h1>
 
-        <ProjectForm customers={data} userId={user?.id} />
+        <CreateProjectForm customers={data} userId={user?.id} />
       </main>
     </>
   );
