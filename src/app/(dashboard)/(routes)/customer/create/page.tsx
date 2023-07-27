@@ -1,11 +1,16 @@
-import { CustomerForm } from "@/components/ProjectForm/";
+"use client";
+
+import { useSelector } from "react-redux";
+
+import { CreateCustomerForm } from "@/components/ProjectForm/";
 
 /**
- * @description CustomerPage component, used to display the customer creation page
- * @version 1.0.0
- * @returns {JSX.Element}
+ * @description CreateCustomerPage component, used to display the customer creation page
+ * @version 1.0.1
  */
-function CustomerPage(): JSX.Element {
+function CreateCustomerPage() {
+  const { user } = useSelector((state: any) => state.user);
+
   return (
     <>
       <main className="w-[90%] sm:w-1/2 mx-auto">
@@ -13,9 +18,9 @@ function CustomerPage(): JSX.Element {
           Add a Customer
         </h1>
 
-        <CustomerForm />
+        <CreateCustomerForm userId={user?.id} />
       </main>
     </>
   );
 }
-export default CustomerPage;
+export default CreateCustomerPage;

@@ -24,8 +24,6 @@ function CreateProjectForm({
   const onSubmit = async (data: any) => {
     data.user = userId;
 
-    console.log("====== data", data);
-
     try {
       await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/projects/`, {
         method: "POST",
@@ -34,6 +32,8 @@ function CreateProjectForm({
         },
         body: JSON.stringify(data),
       });
+
+      form.reset();
     } catch (error) {
       console.log("", error);
     }
