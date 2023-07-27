@@ -14,12 +14,14 @@ import useGetProjects from "@/hooks/useGetProjects";
 
 /**
  * @description Dashboard page
- * @version 1.0.0
+ * @version 1.0.1
  */
 const DashboardPage = () => {
   const { user } = useSelector((state: any) => state.user);
 
-  const { data, isLoading } = useGetProjects();
+  console.log(user);
+
+  const { data, isLoading } = useGetProjects(user?.id);
 
   if (isLoading)
     return (
