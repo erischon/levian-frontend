@@ -20,8 +20,6 @@ function CreateTaskPage({ params }: { params: { id: string } }) {
     fetcher
   );
 
-  console.log("====== projectData", projectData);
-
   return (
     <>
       <main className="w-[90%] sm:w-1/2 mx-auto">

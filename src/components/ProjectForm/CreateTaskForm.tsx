@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import FormRow from "./FormRow";
@@ -18,7 +17,6 @@ function CreateTaskForm({
   userId: string;
 }) {
   const form = useForm();
-  const router = useRouter();
 
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
@@ -49,7 +47,7 @@ function CreateTaskForm({
         onSubmit={handleSubmit(onSubmit)}
       >
         <FormRow
-          label="Nom du client"
+          label="Task name"
           type="text"
           name="name"
           register={register}
@@ -58,22 +56,37 @@ function CreateTaskForm({
         />
 
         <FormRow
-          label="Email"
-          type="email"
-          name="email"
+          label="Description"
+          type="textarea"
+          name="description"
           register={register}
-          required={{ value: true, message: "Email is required" }}
           errors={errors}
+          required={{ value: true, message: "Description is required" }}
         />
 
         <FormRow
-          label="Phone"
-          type="text"
-          name="phone"
+          label="Start date"
+          type="date"
+          name="startDate"
           register={register}
-          required={{ value: true, message: "Phone is required" }}
           errors={errors}
+          required={{ value: true, message: "Start date is required" }}
         />
+
+        <FormRow
+          label="Status"
+          type="select"
+          name="status"
+          register={register}
+          errors={errors}
+          required={{ value: true, message: "Status is required" }}
+        >
+          <option value="">Select a status...</option>
+
+          <option value="in_progress">In progress</option>
+          <option value="completed">Completed</option>
+          <option value="canceled">Canceled</option>
+        </FormRow>
 
         <Button>Submit</Button>
       </form>

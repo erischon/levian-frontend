@@ -64,7 +64,7 @@ function CreateProjectForm({
         />
 
         <FormRow
-          label="Client"
+          label="Customer"
           type="select"
           name="customer"
           register={register}
@@ -81,7 +81,7 @@ function CreateProjectForm({
         </FormRow>
 
         <FormRow
-          label="Date de début"
+          label="Start date"
           type="date"
           name="startDate"
           register={register}
