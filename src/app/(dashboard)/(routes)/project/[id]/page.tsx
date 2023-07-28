@@ -94,6 +94,9 @@ const ProjectDetailPage = ({ params }: { params: { id: string } }) => {
                 <span>{task.name}</span>
                 <span>{task.user.name}</span>
                 <span>{task.status}</span>
+                <span>
+                  <Link href={`/hours/create/${task._id}`}>Hours</Link>
+                </span>
               </li>
             ))}
           </ul>
