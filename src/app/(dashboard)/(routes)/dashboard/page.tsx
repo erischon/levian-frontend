@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
-import FadeLoader from "react-spinners/FadeLoader";
+import BarLoader from "react-spinners/BarLoader";
 
 import { AiOutlineProject } from "react-icons/ai";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
@@ -24,7 +24,7 @@ const DashboardPage = () => {
   if (isLoading)
     return (
       <section className="flex flex-col justify-center items-center w-full h-[calc(100vh-80px)]">
-        <FadeLoader color={"#818cf8"} />
+        <BarLoader color={"#818cf8"} />
       </section>
     );
 

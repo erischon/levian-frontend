@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
-import FadeLoader from "react-spinners/FadeLoader";
+import BarLoader from "react-spinners/BarLoader";
 
 import { setUser } from "@/redux/features/userSlice";
 
@@ -31,7 +31,7 @@ export default function MainLayout({
   if (isLoading)
     return (
       <section className="flex flex-col justify-center items-center w-full h-[calc(100vh-80px)]">
-        <FadeLoader color={"#818cf8"} />
+        <BarLoader color={"#818cf8"} />
       </section>
     );
 
