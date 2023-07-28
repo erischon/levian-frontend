@@ -19,7 +19,7 @@ function CreateHoursPage({ params }: { params: { id: string } }) {
     error: projectError,
     isLoading: projectIsLoading,
   } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URI}${tasksRoute.get}${params?.id}`,
+    `${process.env.NEXT_PUBLIC_API_URI}${tasksRoute.getOne}${params?.id}`,
     fetcher
   );
 

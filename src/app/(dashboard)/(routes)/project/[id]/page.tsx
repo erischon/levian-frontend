@@ -5,6 +5,8 @@ import useSWR from "swr";
 
 import { GoTasklist } from "react-icons/go";
 import { BsInfoSquare } from "react-icons/bs";
+import { apiRoutes } from "@/utils/apiRoutes";
+import CardTask from "@/components/CardTask";
 
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
@@ -13,12 +15,14 @@ const fetcher = (args: any) => fetch(args).then((res) => res.json());
  * @version 1.0.0
  */
 const ProjectDetailPage = ({ params }: { params: { id: string } }) => {
+  const { projectsRoute, tasksRoute } = apiRoutes;
+
   const {
     data: projectData,
     error: projectError,
     isLoading: projectIsLoading,
   } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URI}/api/projects/project/${params?.id}`,
+    `${process.env.NEXT_PUBLIC_API_URI}${projectsRoute.getOne}${params?.id}`,
     fetcher
   );
 
@@ -27,7 +31,7 @@ const ProjectDetailPage = ({ params }: { params: { id: string } }) => {
     error: taskError,
     isLoading: taskIsLoading,
   } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URI}/api/tasks/project/${projectData?._id}`,
+    `${process.env.NEXT_PUBLIC_API_URI}${tasksRoute.getByProject}${projectData?._id}`,
     fetcher
   );
 
@@ -90,14 +94,7 @@ const ProjectDetailPage = ({ params }: { params: { id: string } }) => {
 
           <ul className="mt-4">
             {taskData?.map((task: any) => (
-              <li key={task._id} className="flex justify-between">
-                <span>{task.name}</span>
-                <span>{task.user.name}</span>
-                <span>{task.status}</span>
-                <span>
-                  <Link href={`/hours/create/${task._id}`}>Hours</Link>
-                </span>
-              </li>
+              <CardTask key={task._id} task={task} />
             ))}
           </ul>
         </section>

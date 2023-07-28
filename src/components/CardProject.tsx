@@ -4,6 +4,7 @@ import Link from "next/link";
 import useSWR from "swr";
 
 import ButtonLight from "./ButtonLight";
+import { apiRoutes } from "@/utils/apiRoutes";
 
 interface ProjectProps {
   project: {
@@ -21,12 +22,23 @@ const fetcher = (args: any) => fetch(args).then((res) => res.json());
  * @version 1.0.0
  */
 const CardProject: React.FC<ProjectProps> = ({ project }) => {
+  const { tasksRoute, hoursRoute } = apiRoutes;
+
   const {
     data: tasksData,
     error: tasksError,
     isLoading: tasksIsLoading,
   } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URI}/api/tasks/project/${project?._id}`,
+    `${process.env.NEXT_PUBLIC_API_URI}${tasksRoute.getByProject}${project?._id}`,
+    fetcher
+  );
+
+  const {
+    data: hoursData,
+    error: hoursError,
+    isLoading: hoursIsLoading,
+  } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URI}${hoursRoute.getByTask}${project?._id}`,
     fetcher
   );
 
