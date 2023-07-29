@@ -11,6 +11,7 @@ import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import Button from "@/components/Button";
 import CardProject from "@/components/CardProject";
 import useGetProjects from "@/hooks/useGetProjects";
+import Loader from "@/utils/loader";
 
 /**
  * @description Dashboard page
@@ -21,12 +22,7 @@ const DashboardPage = () => {
 
   const { data, isLoading } = useGetProjects(user?.id);
 
-  if (isLoading)
-    return (
-      <section className="flex flex-col justify-center items-center w-full h-[calc(100vh-80px)]">
-        <BarLoader color={"#818cf8"} />
-      </section>
-    );
+  if (isLoading) return <Loader />;
 
   // sort projects by date
   // function sortByDate(data: any) {

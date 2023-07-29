@@ -11,7 +11,7 @@ const Button: React.FC<ButtonProps> = ({ children, color }): JSX.Element => {
   return (
     <button
       className={`my-2 px-6 py-2 ${
-        color ? color : "bg-indigo-700"
+        color ? color : "bg-teal-700"
       } text-white font-semibold rounded-md shadow-sm hover:opacity-80 transition-opacity duration-300 ease-in-out`}
     >
       {children}

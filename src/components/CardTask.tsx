@@ -6,6 +6,7 @@ import useSWR from "swr";
 
 import { BsHourglassSplit, BsCalendar2Date } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
+import { MdMoreTime } from "react-icons/md";
 
 import { apiRoutes } from "@/utils/apiRoutes";
 
@@ -48,36 +49,25 @@ const CardTask = ({ task }: { task: any }) => {
 
   return (
     <>
-      <div className="flex flex-col gap-2 shadow-sm p-4 text-sm">
-        <div className="flex justify-between items-center">
-          <Link href={`/task/${task?._id}`}>
-            <h2 className="text-md font-semibold">{task?.name}</h2>
-          </Link>
+      <div className="grid grid-cols-5 w-full justify-between items-center shadow-sm p-4 text-sm border-1 border-gray-50">
+        <Link href={`/task/${task?._id}`} className="col-span-2">
+          <h2 className="font-semibold">{task?.name}</h2>
+        </Link>
 
-          <div className=" font-medium px-3 py-1 bg-purple-100 rounded-md">
-            {task?.status}
+        <Link href={`/hours/create/${task?._id}`} className="max-w-[100px]">
+          <div className="text-md">
+            {`${hours} ${hours > 1 ? "hours" : "hour"}`}
           </div>
-        </div>
+        </Link>
 
-        <div className="grid grid-cols-3">
-          <div className="flex justify-start items-center gap-2">
-            <AiOutlineUser />
-            <span className="">{task?.user?.name}</span>
+        <Link href={`/hours/create/${task?._id}`} className="max-w-[50px] ">
+          <div>
+            <MdMoreTime className="text-2xl text-orange-600 font-semibold" />
           </div>
+        </Link>
 
-          <div className="">
-            <Link href={`/hours/create/${task?._id}`}>
-              <div className="flex justify-start items-center gap-2">
-                <BsHourglassSplit />
-                <span className="">{hours}</span>
-              </div>
-            </Link>
-          </div>
-
-          <div className="flex justify-start items-center gap-2">
-            <BsCalendar2Date />
-            <span className="">{startDate}</span>
-          </div>
+        <div className=" font-medium px-3 py-1 bg-teal-700 rounded-sm text-white max-w-[100px]">
+          {task?.status}
         </div>
       </div>
     </>

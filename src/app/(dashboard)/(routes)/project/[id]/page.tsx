@@ -7,6 +7,7 @@ import { GoTasklist } from "react-icons/go";
 import { BsInfoSquare } from "react-icons/bs";
 import { apiRoutes } from "@/utils/apiRoutes";
 import CardTask from "@/components/CardTask";
+import Loader from "@/utils/Loader";
 
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
@@ -35,6 +36,8 @@ const ProjectDetailPage = ({ params }: { params: { id: string } }) => {
     fetcher
   );
 
+  if (projectIsLoading || taskIsLoading) return <Loader />;
+
   const startDate = new Date(projectData?.startDate).toLocaleDateString();
 
   return (
@@ -44,12 +47,12 @@ const ProjectDetailPage = ({ params }: { params: { id: string } }) => {
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-semibold mb-4">{projectData?.name}</h1>
 
-            <div className="border border-indigo-200 py-1 px-3 rounded-md shadow-sm text-sm">
+            <div className="border border-teal-200 py-1 px-3 rounded-md shadow-sm text-sm">
               <Link href="/">Update project</Link>
             </div>
           </div>
 
-          <p className="text-sm pl-4 border-l-4 border-indigo-300">
+          <p className="text-sm pl-4 border-l-4 border-teal-300">
             {projectData?.description}
           </p>
         </section>
@@ -61,11 +64,11 @@ const ProjectDetailPage = ({ params }: { params: { id: string } }) => {
           </h2>
 
           <div className="sm:flex sm:justify-start sm:items-center gap-6 text-sm">
-            <p className="sm:border-r-2 border-indigo-300 sm:pr-4">
+            <p className="sm:border-r-2 border-teal-300 sm:pr-4">
               Start Date :{" "}
               <span className="font-semibold tracking-wider">{startDate}</span>
             </p>
-            <p className="sm:border-r-2 border-indigo-300 sm:pr-4">
+            <p className="sm:border-r-2 border-teal-300 sm:pr-4">
               Status :{" "}
               <span className="font-semibold tracking-wider">
                 {projectData?.status}
@@ -87,7 +90,7 @@ const ProjectDetailPage = ({ params }: { params: { id: string } }) => {
               Tasks
             </h2>
 
-            <div className="border border-indigo-200 py-1 px-3 rounded-md shadow-sm text-sm">
+            <div className="border-2 border-teal-200 py-1 px-3 rounded-md shadow-sm text-sm font-medium">
               <Link href={`/task/create/${projectData?._id}`}>Add Task</Link>
             </div>
           </div>

@@ -3,12 +3,12 @@
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
-import BarLoader from "react-spinners/BarLoader";
 
 import { setUser } from "@/redux/features/userSlice";
 
 import Navbar from "@/components/Navbar";
 import useUser from "@/hooks/useUser";
+import Loader from "@/utils/Loader";
 
 /**
  * @description Main layout of the protected app
@@ -28,12 +28,7 @@ export default function MainLayout({
     dispatch(setUser(user));
   }, [user, dispatch]);
 
-  if (isLoading)
-    return (
-      <section className="flex flex-col justify-center items-center w-full h-[calc(100vh-80px)]">
-        <BarLoader color={"#818cf8"} />
-      </section>
-    );
+  if (isLoading) return <Loader />;
 
   return (
     <div className="mx-4 my-4">
